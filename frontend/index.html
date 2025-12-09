@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>康康1号机( •̀ ω •́ )✧</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">🤖</div>
+                <h1>康康1号机</h1>
+                <p class="subtitle">( •̀ ω •́ )✧</p>
+            </div>
+
+            <div class="settings">
+                <h3><i class="fas fa-cog"></i> 设置</h3>
+                <div class="setting-item">
+                    <label for="temperature">温柔度:</label>
+                    <input type="range" id="temperature" min="0" max="1" step="0.1" value="0.7">
+                    <span id="temp-value">0.7</span>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h3><i class="fas fa-lightbulb"></i> 使用提示</h3>
+                <ul>
+                    <li>可以调整温柔度设置</li>
+                    <li>对话历史会自动保存</li>
+                    <li>康康1号机基于gpt-4o-mini</li>
+                    <li>康康1号机有设置特殊问答彩蛋哦</li>
+                </ul>
+            </div>
+
+            <div class="footer">
+                <p>需要帮助？联系主人 <i class="fas fa-phone"></i> 18029181631</p>
+            </div>
+        </div>
+
+        <!-- 主聊天区 -->
+        <div class="main-content">
+            <!-- 聊天头部 -->
+            <div class="chat-header">
+                <div class="header-left">
+                    <h2><i class="fas fa-robot"></i> KKChatBot-1</h2>
+                    <p class="status" id="status">在线</p>
+                </div>
+                <button class="clear-btn" id="clear-chat">
+                    <i class="fas fa-trash"></i> 清空对话
+                </button>
+            </div>
+
+            <!-- 消息容器 -->
+            <div class="messages-container" id="messages-container">
+                <!-- 欢迎消息 -->
+                <div class="message system">
+                    <div class="avatar">🤖</div>
+                    <div class="bubble">
+                        <p>乖宝，我是康康1号机 (｡･ω･｡)ﾉ♡</p>
+                        <p>发生什么了呀？我会一直陪着你哦~</p>
+                        <span class="time">刚刚</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 输入区域 -->
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <input
+                        type="text"
+                        id="message-input"
+                        placeholder="(・∀・(・∀・(・∀・*)..."
+                        autocomplete="off"
+                    >
+                    <button id="send-button">
+                        <i class="fas fa-paper-plane"></i> 发送(●'◡'●)
+                    </button>
+                </div>
+                <div class="input-hints">
+                    <span>按 Enter 发送，Shift+Enter 换行</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载动画 -->
+    <div class="loading" id="loading">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>快啦，就差一点！o(*￣▽￣*)ブ</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
