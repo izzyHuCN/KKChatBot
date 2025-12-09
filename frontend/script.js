@@ -1,6 +1,6 @@
 class ChatApp {
     constructor() {
-        this.apiUrl = 'http://10.105.165.32:8000/api/chat';
+        this.apiUrl = '/api/chat';
         this.messages = [];
         this.conversationId = null;
 
@@ -41,7 +41,7 @@ class ChatApp {
 
     async checkHealth() {
         try {
-            const response = await fetch('http://localhost:8000/api/health');
+            const response = await fetch('/api/health');
             if (response.ok) {
                 this.updateStatus('在线', '#4CAF50');
             }
