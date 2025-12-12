@@ -224,6 +224,31 @@ input[type="range"] {
     flex-shrink: 0;
 }
 
+.avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin: 0 12px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.message.user .avatar img {
+    border-color: #4CAF50;
+}
+
+.message.system .avatar img {
+    border-color: #667eea;
+}
+
 .message.user .avatar {
     background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
 }
@@ -384,22 +409,198 @@ input[type="range"] {
     background: #a8a8a8;
 }
 
-/* 响应式设计 */
+/* 修改现有的媒体查询部分，使其更适配手机 */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
     }
 
     .sidebar {
         width: 100%;
         height: auto;
+        max-height: 180px;
+        overflow-y: auto;
+        padding: 15px;
+        flex-shrink: 0;
+    }
+
+    .logo {
+        margin-bottom: 15px;
+    }
+
+    .logo-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+
+    .logo h1 {
+        font-size: 18px;
+    }
+
+    .settings, .instructions {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+
+    .footer {
+        display: none; /* 手机端隐藏底部联系方式 */
     }
 
     .main-content {
-        height: calc(100vh - 300px);
+        height: calc(100vh - 180px);
+        flex: 1;
+    }
+
+    .chat-header {
+        padding: 12px 15px;
+    }
+
+    .header-left h2 {
+        font-size: 16px;
+    }
+
+    .clear-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .messages-container {
+        padding: 15px;
+    }
+
+    /* 修改头像大小 */
+    .avatar {
+        width: 35px;
+        height: 35px;
+        margin: 0 8px;
+    }
+
+    /* 调整消息气泡 */
+    .bubble {
+        max-width: 90%;
+        padding: 10px 15px;
+        border-radius: 15px;
+    }
+
+    .message.system .bubble {
+        border-top-left-radius: 5px;
+    }
+
+    .message.user .bubble {
+        border-top-right-radius: 5px;
+    }
+
+    .bubble p {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .time {
+        font-size: 10px;
+    }
+
+    .input-area {
+        padding: 12px 15px;
+    }
+
+    .input-wrapper {
+        gap: 8px;
+    }
+
+    #message-input {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+
+    #send-button {
+        padding: 12px 20px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .input-hints {
+        font-size: 11px;
+    }
+}
+
+/* 针对小屏幕手机的优化 */
+@media (max-width: 480px) {
+    .sidebar {
+        max-height: 150px;
+        padding: 10px;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    .logo h1 {
+        font-size: 16px;
+    }
+
+    .subtitle {
+        font-size: 12px;
+    }
+
+    .settings h3, .instructions h3 {
+        font-size: 14px;
+    }
+
+    .setting-item label {
+        font-size: 12px;
+    }
+
+    .instructions li {
+        font-size: 11px;
+        margin-bottom: 6px;
+    }
+
+    .main-content {
+        height: calc(100vh - 150px);
+    }
+
+    .avatar {
+        width: 32px;
+        height: 32px;
+        margin: 0 6px;
     }
 
     .bubble {
         max-width: 85%;
+        padding: 8px 12px;
+    }
+
+    .bubble p {
+        font-size: 13px;
+    }
+
+    #message-input {
+        padding: 10px 12px;
+    }
+
+    #send-button {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+}
+
+/* 确保在手机端输入时键盘不会遮挡输入框 */
+@media (max-height: 600px) {
+    .messages-container {
+        padding-bottom: 100px;
+    }
+}
+
+/* 添加触摸友好性 */
+@media (hover: none) and (pointer: coarse) {
+    .clear-btn, #send-button {
+        min-height: 44px; /* 最小触摸目标尺寸 */
+    }
+
+    #message-input {
+        font-size: 16px; /* 防止iOS自动缩放 */
     }
 }

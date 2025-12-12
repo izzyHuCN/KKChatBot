@@ -37,6 +37,24 @@ class ChatApp {
         this.temperatureSlider.addEventListener('input', (e) => {
             this.tempValue.textContent = e.target.value;
         });
+
+        // 手机端输入框获得焦点时，滚动到底部
+        this.messageInput.addEventListener('focus', () => {
+            setTimeout(() => {
+                this.scrollToBottom();
+            }, 300);
+        });
+
+        // 防止手机端双击缩放
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (event) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+              event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
     }
 
     async checkHealth() {
@@ -124,18 +142,25 @@ class ChatApp {
         const messageElement = document.createElement('div');
         messageElement.className = `message ${message.role === 'user' ? 'user' : 'system'}`;
 
-        const avatar = message.role === 'user' ? '🐇' : '🤖';
+        let avatarImg = '';
+        if (message.role === 'user') {
+        avatarImg = 'images/baby.jpg'; // 用户头像
+        } else {
+        avatarImg = 'images/kangkang.jpg'; // 机器人头像
+        }
 
         messageElement.innerHTML = `
-            <div class="avatar">${avatar}</div>
-            <div class="bubble">
-                <p>${this.formatContent(message.content)}</p>
-                <span class="time">${message.timestamp}</span>
-            </div>
-        `;
+    <div class="avatar">
+        <img src="${avatarImg}" alt="${message.role === 'user' ? '用户' : '机器人'}">
+    </div>
+    <div class="bubble">
+        <p>${this.formatContent(message.content)}</p>
+        <span class="time">${message.timestamp}</span>
+    </div>
+    `;
 
-        this.messagesContainer.appendChild(messageElement);
-        this.scrollToBottom();
+    this.messagesContainer.appendChild(messageElement);
+    this.scrollToBottom();
     }
 
     formatContent(content) {
@@ -144,7 +169,12 @@ class ChatApp {
     }
 
     scrollToBottom() {
-        this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+        setTimeout(() => {
+            this.messagesContainer.scrollTo({
+                top: this.messagesContainer.scrollHeight,
+                behavior: 'smooth'
+            });
+        }, 100);
     }
 
     showLoading(show) {
